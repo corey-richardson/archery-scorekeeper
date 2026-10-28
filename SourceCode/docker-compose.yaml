@@ -4,6 +4,7 @@ services:
     build:
       context: ./archeryutils-service
     container_name: archeryutils-service
+    restart: always
     volumes:
       - ./archeryutils-service:/app:rw
     environment:
@@ -31,10 +32,11 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   backend:
-    build: 
+    build:
       context: ./backend
       target: development
     container_name: backend
+    restart: always
     volumes:
       - ./backend:/app:rw
       - /app/node_modules
@@ -51,10 +53,11 @@ services:
         condition: service_started
 
   frontend:
-    build: 
+    build:
       context: ./frontend
       target: development
     container_name: frontend
+    restart: always
     volumes:
       - ./frontend:/app:rw
       - /app/node_modules
